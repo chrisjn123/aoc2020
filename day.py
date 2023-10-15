@@ -22,8 +22,8 @@ def get_dest(v: int):
     return d
 
 def insert_clockwise(d_idx:int, values: list) -> None:
-    global nums
-    idxs = [(d_idx + i) % 9 for i in range(1,4)]
+    global nums, length
+    idxs = [(d_idx + i) % length for i in range(1,4)]
     for ix, val in zip(idxs, values):
         nums.insert(ix, val)
 
