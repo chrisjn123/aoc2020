@@ -35,6 +35,16 @@ def print_nums(curr) -> None:
     s = 'cups: ' + s.replace(str(curr), f'({curr})')
     print(s)
 
+def get_after_one_clockwise() -> str:
+    global nums
+    idx_one = nums.index(1)
+    ret = nums[idx_one:]
+    for i in nums[:idx_one]:
+        ret.append(i)
+    ret.remove(1)
+    return ret
+
+
 for itt in range(100):
     print(f'-- Move {itt+1} --') 
     curr = nums[curr_idx]
@@ -51,3 +61,4 @@ for itt in range(100):
     insert_clockwise(dest_idx, next_3)
     print()
     curr_idx = (curr_idx + 1) % length
+    get_after_one_clockwise()
