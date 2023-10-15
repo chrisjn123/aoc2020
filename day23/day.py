@@ -1,6 +1,8 @@
-nums = list(map(int, list(open('test.txt').read().strip())))
+nums = list(map(int, list(open('in.txt').read().strip())))
+for i in range(max(nums) + 1, 1_000_000 + 1):
+    nums.append(i)
 length = len(nums)
-
+print(f'There are {length} cups')
 def get_clockwise(idx: int) -> list:
     global nums, length
     return [
@@ -18,7 +20,7 @@ def get_dest(v: int):
     while d not in nums:
         d -= 1
         if d < 1:
-            d = 9
+            d = max(nums)
     return d
 
 def insert_clockwise(d_idx:int, values: list) -> None:
@@ -42,23 +44,27 @@ def get_after_one_clockwise() -> str:
     for i in nums[:idx_one]:
         ret.append(i)
     ret.remove(1)
-    return ret
-
-
-for itt in range(100):
-    print(f'-- Move {itt+1} --') 
+    return ''.join(map(str, ret))
+print('Begin moves...')
+for itt in range(10_000_000):
+    if itt+1 % 1000 == 0:
+        print(f'-- Move {itt+1} --') 
     curr = nums[curr_idx]
-    print_nums(curr)
+    #print_nums(curr)
     
     next_3 = get_clockwise(curr_idx)
     remove_next_3(next_3)
     next_idx = get_dest(curr)
     dest = get_dest(curr)
     dest_idx = nums.index(dest)
-    print('pick: ' + str(next_3).replace('[','').replace(']', ''))
-    print('dest: ' + str(dest))
+    #print('pick: ' + str(next_3).replace('[','').replace(']', ''))
+    #print('dest: ' + str(dest))
     
     insert_clockwise(dest_idx, next_3)
-    print()
-    curr_idx = (curr_idx + 1) % length
-    get_after_one_clockwise()
+    #print()
+    curr_idx = (nums.index(curr) + 1) % length
+#print(get_after_one_clockwise())
+idx_one = nums.index(1)
+
+print(f'Next val: {nums[(idx_one + 1) % 1_000_000]}')
+print(f'Next2val: {nums[(idx_one + 2) % 1_000_000]}')
