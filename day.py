@@ -1,9 +1,10 @@
 nums = list(map(int, list(open('test.txt').read().strip())))
-
+length = len(nums)
 
 def get_clockwise(idx: int) -> list:
+    global nums, length
     return [
-        nums[(idx + i) % 9] for i in range(1, 4)
+        nums[(idx + i) % length] for i in range(1, 4)
     ]
 
 def remove_next_3(values: list) -> None:
@@ -49,4 +50,4 @@ for itt in range(100):
     
     insert_clockwise(dest_idx, next_3)
     print()
-    curr_idx = (curr_idx + 1) % 9
+    curr_idx = (curr_idx + 1) % length
